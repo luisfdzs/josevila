@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run build)",
+      "Bash(npm run preview)",
+      "Bash(npm run test)",
+      "Bash(npm run test *)",
+      "Bash(npx astro check)",
+      "Bash(npx vitest run *)",
+      "Bash(astro dev --background)",
+      "Bash(astro dev stop)",
+      "Bash(astro dev status)",
+      "Bash(astro dev logs)",
+      "Bash(node scripts/capturar.mjs)",
+      "Bash(node scripts/capturar.mjs *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)"
+    ],
+    "ask": [
+      "Bash(vercel --prod *)",
+      "Bash(npx vercel --prod *)",
+      "Bash(git push origin *prod*)",
+      "Bash(git push * prod)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/comprobar-tipos.mjs\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
