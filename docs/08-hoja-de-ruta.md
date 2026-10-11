@@ -23,10 +23,10 @@ Tareas:
 
 **Criterios de aceptación:**
 - [x] `npm run build`, `npx astro check` y `npm run test` pasan (11 pruebas: `azar` y esquemas de las 5 colecciones). El hook de tipos detectó los errores reales del starter al limpiarlo.
-- [ ] Previsualización de `dev` y `josevilatest.vercel.app` funcionando; producción solo desde `prod`. Proyecto de Vercel creado con rama de producción `prod`, dominio de test fijado a `test`, salvaguarda en `vercel.json` y protección como Boxrus; falta el primer despliegue.
+- [x] Previsualización de `dev` y `josevilatest.vercel.app` funcionando (protegidas); producción solo desde `prod` (`josevila.vercel.app`, pública). En el primer push, `dev` y `test` salieron como producción pese a tener `prod` como rama de producción: la salvaguarda los canceló y se relanzaron como previsualización por la API.
 - [x] Pregunta 3 (tipografía) respondida: Bodoni Moda.
 
-Desviaciones: el repo `luisfdzs/JoseVila` ya existía (esqueleto Next.js antiguo); se renombró a `josevila-next-archivo` (`09`). `prod` está en GitHub pero aún sin desplegar: el primer despliegue de producción, solo con la aprobación de Luis.
+Desviaciones: el repo `luisfdzs/JoseVila` ya existía (esqueleto Next.js antiguo); se renombró a `josevila-next-archivo` (`09`). Luis aprobó subir a `test` y `prod` el 2026-10-11.
 
 ## Fase 1 · Maqueta en bloques
 Punto de partida: leer `02`, `03`, `04`, `05` («Código que se reutiliza de Boxrus»), `06` y `09` (preguntas 7 y 8).
