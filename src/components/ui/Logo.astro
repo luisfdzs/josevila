@@ -1,0 +1,36 @@
+---
+// Logotipo provisional (texto JOSÉ VILA en la tipografía de titulares) arriba y
+// centrado: vuelve al inicio. En la fase 1 lo animará el recorrido (de Boxrus).
+---
+
+<a class="logo" href="/" aria-label="José Vila, volver al inicio">JOSÉ VILA</a>
+
+<style>
+  .logo {
+    position: fixed;
+    top: calc(0.9rem + env(safe-area-inset-top));
+    left: 50%;
+    z-index: 3;
+    transform: translateX(-50%);
+    padding: 0.4rem 1.2rem 0.3rem;
+    font-family: var(--fuente-titulares);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--color-blanco-roto);
+    text-decoration: none;
+    background: rgb(12 13 15 / 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-bottom: 2px solid var(--color-laton);
+    border-radius: 999px;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+  }
+
+  .logo:focus-visible {
+    outline: 2px solid var(--color-luz);
+    outline-offset: 3px;
+  }
+</style>

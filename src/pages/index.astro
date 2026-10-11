@@ -1,11 +1,32 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Base from '../layouts/Base.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<Base titulo="José Vila" descripcion="Barbería José Vila: corte, barba y afeitado clásico.">
+  <main>
+    <h1>José Vila</h1>
+    <p>Barbería. Corte, barba y afeitado clásico.</p>
+  </main>
+</Base>
+
+<style>
+  main {
+    min-height: 100svh;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    padding: 6rem 1.5rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0.75rem 0 0;
+    color: var(--color-laton);
+    letter-spacing: 0.04em;
+  }
+</style>

@@ -87,8 +87,8 @@ Gradación general: **neutra, con negros profundos pero no empastados**; el lat�
 - Contraste alto sin negros empastados; viñeteado leve, grano sutil, profundidad de campo en planos de detalle.
 
 ## Tipografía e interfaz
-- Titulares: tipografía **con carácter de rótulo clásico**, elegante (OFL, alojada en el sitio). Candidatas: Playfair Display, Bodoni Moda, Cormorant Garamond (serifas de alto contraste), o una condensada de rótulo como alternativa. Decisión en la fase 0 (pregunta abierta en `09`).
-- Textos: sans-serif muy legible (candidata: Inter).
+- Titulares: **Bodoni Moda** (OFL, variable, alojada en el sitio con Fontsource), serifa de alto contraste con eje de **tamaño óptico** (`opsz`): en tamaños grandes afina los trazos y en pequeños los engrosa, así aguanta tanto en el logotipo como en el rótulo. Elegida por Luis en la fase 0 entre Playfair Display, Bodoni Moda, Cormorant Garamond y Oswald (`09`). Logotipo en mayúsculas, peso 700 y espaciado amplio (`0.18em`).
+- Textos: **Inter** (OFL, variable).
 - El rótulo **JOSÉ VILA** de la escena y el logotipo de la interfaz usan la misma tipografía de titulares.
 - Interfaz mínima, fondo translúcido oscuro, **acento latón** (`#b08d57`; comprobar contraste AA sobre el fondo). Nada compite con la escena.
 

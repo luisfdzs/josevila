@@ -21,6 +21,10 @@
 | 2026-10-11 | Se **heredan de Boxrus** (revisables): scroll por paradas en móvil (2,2 s), píldora con Inicio (saltos de 1,5 s con fundido si no son vecinas), logotipo que vuelve al inicio con un viaje, deslizamiento horizontal (izquierda avanza), final en una sola transición, velocidad uniforme con límite de 36° por 1 %, postproceso en trozo diferido, entorno capturado, AgX | Decisiones de Luis en Boxrus que funcionaron; evita repetir iteraciones |
 | 2026-10-11 | Capturas con **Playwright** (`scripts/capturar.mjs`, de Billaron) como método principal; Claude in Chrome con iframe como respaldo | En Billaron y Boxrus la ventana oculta de Chrome hizo perder rondas de prueba |
 | 2026-10-11 | Metodología documentada en `10-metodologia.md`: 7 agentes con modelo, esfuerzo y herramientas fijados | Petición de Luis: poder empezar en sesiones nuevas sin contexto |
+| 2026-10-11 | Tipografía de titulares, logotipo y rótulo: **Bodoni Moda** (pregunta 3); textos en Inter | Elección de Luis sobre una muestra de Playfair Display, Bodoni Moda, Cormorant Garamond y Oswald (opción recomendada: lujo preciso, aguanta en el rótulo) |
+| 2026-10-11 | Bodoni Moda con el eje **`opsz`** (`opsz.css`, 46 KB el subconjunto latino) en vez de solo `wght` (26 KB) | Criterio de Claude, revisable: el tamaño óptico ajusta el contraste al tamaño y es lo que la hace legible en el logotipo pequeño |
+| 2026-10-11 | Salvaguarda de producción como **`ignoreCommand` en `vercel.json`** (versionada) en vez de en el panel de Vercel | Criterio de Claude, revisable: queda en el repo desde el primer push y no depende de configurarla a mano |
+| 2026-10-11 | El repo antiguo `luisfdzs/JoseVila` (esqueleto Next.js del 2026-10-03) se renombra a `josevila-next-archivo` y se crea `luisfdzs/josevila` limpio | Decisión de Luis (opción recomendada: reversible, no se pierde nada) |
 
 ## Preguntas abiertas
 
@@ -28,7 +32,7 @@
 |---|---|---|---|---|
 | 1 | ¿Ciudad para la dirección ficticia? (afecta al mapa) | Contenido | Fase 4 | — |
 | 2 | Tono de los textos: tú o usted; más clásico o más cercano | Interfaz | Fase 4 | Tú, cercano y sobrio |
-| 3 | Tipografía de titulares: Playfair Display, Bodoni Moda, Cormorant Garamond u otra condensada de rótulo | Interfaz, rótulo 3D | Fase 0 | Enseñar a Luis una muestra de las tres con «José Vila» y elegir |
+| ~~3~~ | ~~Tipografía de titulares~~ | — | — | **Cerrada el 2026-10-11:** Bodoni Moda (ver decisiones) |
 | 4 | Hora del día y color del sol (afecta a la dirección del sol y al haz del lucernario) | Luz | Fase 3 | Mediodía cálido, sol alto (~65°) para que el haz caiga sobre el sillón |
 | 5 | ¿Luz precalculada en Blender? | Luz, peso | Fase 3 | Sí, como en Boxrus (escena estática; proceso ya probado) |
 | 6 | Reflejo del suelo: reflejo plano real (`MeshReflectorMaterial`) o solo entorno capturado | Luz, rendimiento | Fase 3 | Real en nivel alto si cabe en el presupuesto; entorno en medio y bajo |

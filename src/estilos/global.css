@@ -1,0 +1,38 @@
+/* Paleta y tipografía de docs/02-direccion-de-arte.md */
+:root {
+  --color-negro: #121314;
+  --color-negro-satinado: #18191b;
+  --color-piedra: #0c0d0f;
+  --color-luz: #eef3f8;
+  --color-blanco-roto: #f2f1ee;
+  --color-laton: #b08d57;
+  --color-laton-sombra: #8c6d3f;
+
+  --fuente-titulares: 'Bodoni Moda Variable', 'Bodoni 72', 'Didot', Georgia, serif;
+  --fuente-texto: 'Inter Variable', system-ui, sans-serif;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--color-negro);
+  color: var(--color-blanco-roto);
+  font-family: var(--fuente-texto);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fuente-titulares);
+  font-weight: 600;
+  line-height: 1.1;
+}

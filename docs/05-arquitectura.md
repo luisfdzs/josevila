@@ -148,7 +148,7 @@ Boxrus (`C:\Proyectos\boxrus`) ya resolvió el recorrido por scroll, el móvil, 
 | `prod` | Producción; rama de producción de Vercel | `https://josevila.vercel.app` |
 
 - Flujo: `dev` → `test` → `prod` (avance rápido: `git push origin dev:test dev:prod`). Subir a `prod` **publica**: solo con aprobación explícita de Luis en ese momento.
-- Salvaguarda (*Ignored Build Step*): se descarta cualquier despliegue de producción que no venga de `prod` (en Boxrus y Billaron el primer push salió como producción). Tras cada push a `test` o `prod`, comprobar el *target* y los alias del despliegue.
+- Salvaguarda (*Ignored Build Step*, como `ignoreCommand` en `vercel.json`): se descarta cualquier despliegue de producción que no venga de `prod` (en Boxrus y Billaron el primer push salió como producción). Tras cada push a `test` o `prod`, comprobar el *target* y los alias del despliegue.
 - Protección de Vercel activa en previsualizaciones y en `josevilatest`; `josevila.vercel.app`, público.
 - `vercel.json`: caché larga para `/_astro/`, `texturas/`, `luz/`, `modelos/`, `basis/`.
 - Al ser público, el repo **no** enlaza ni describe la barbería de la referencia (eso vive en la memoria local).

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "ignoreCommand": "if [ \"$VERCEL_ENV\" = \"production\" ] && [ \"$VERCEL_GIT_COMMIT_REF\" != \"prod\" ]; then echo 'Producción solo desde prod: se descarta'; exit 0; fi; exit 1",
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(texturas|luz|modelos|basis)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
+    }
+  ]
+}

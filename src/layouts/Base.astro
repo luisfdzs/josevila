@@ -1,0 +1,35 @@
+---
+import '@fontsource-variable/bodoni-moda/opsz.css';
+import '@fontsource-variable/inter/wght.css';
+import '../estilos/global.css';
+import Logo from '../components/ui/Logo.astro';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+}
+
+const { titulo, descripcion } = Astro.props;
+const tituloCompleto = titulo === 'José Vila' ? titulo : `${titulo} · José Vila`;
+const canonica = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    {canonica && <link rel="canonical" href={canonica} />}
+    <!-- Proyecto de práctica: no indexar una barbería inexistente (docs/09) -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#121314" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <Logo />
+    <slot />
+  </body>
+</html>

@@ -65,4 +65,5 @@ El clasificador de permisos bloqueó en Boxrus descargar y descomprimir en un so
 
 | Recurso | Fichero en el repo | Autor | Fuente (URL) | Licencia | Atribución necesaria | Fecha |
 |---|---|---|---|---|---|---|
-| *(vacío: se rellena antes de usar cada recurso)* | | | | | | |
+| Bodoni Moda (variable, ejes `opsz` y `wght`): titulares, logotipo y rótulo | `@fontsource-variable/bodoni-moda` (npm) | The Bodoni Moda Project Authors | https://github.com/indestructible-type/Bodoni | SIL OFL 1.1 | No (se cita en créditos) | 2026-10-11 |
+| Inter (variable, eje `wght`): textos | `@fontsource-variable/inter` (npm) | The Inter Project Authors | https://github.com/rsms/inter | SIL OFL 1.1 | No (se cita en créditos) | 2026-10-11 |
