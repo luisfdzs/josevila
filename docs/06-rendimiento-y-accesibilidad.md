@@ -30,6 +30,14 @@ FPS y llamadas de dibujo: `node scripts/capturar.mjs --medir` (o `?depuracion=1`
 
 Cada cierre de fase anota aquí una tabla «Estado medido (fase N)» con el peso por trozo, la descarga 3D, FPS y llamadas de dibujo.
 
+### Estado medido (fase 0)
+| Pieza | gzip | Nota |
+|---|---|---|
+| `client.*.js` (cliente de React de `@astrojs/react`) | 66,6 KB | Se genera pero la portada aún no lo carga (sin isla) |
+| CSS global | 2,2 KB | — |
+| Bodoni Moda `opsz`, subconjunto latino (woff2) | 45 KB | Fuera del presupuesto de JS; el resto de subconjuntos solo se descarga si hace falta (`unicode-range`) |
+| Inter `wght`, subconjunto latino (woff2) | 47 KB | Ídem |
+
 ## Niveles de calidad
 | Ajuste | Alto | Medio | Bajo |
 |---|---|---|---|

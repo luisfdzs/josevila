@@ -5,7 +5,7 @@ Cada fase termina con **capturas y un resumen para Luis**, que da el visto bueno
 ---
 
 ## Estado
-- **Siguiente: fase 0** (no ha empezado; la documentación y la configuración de Claude Code están listas desde el 2026-10-11).
+- **Fase 0 terminada el 2026-10-11, pendiente de la aprobación de Luis.** Siguiente: fase 1 (maqueta en bloques).
 
 ## Fase 0 · Preparación
 Punto de partida en una sesión nueva: leer `01`, `05` (stack, carpetas, código que se reutiliza, despliegue), `06` («Lo que se sabe de Boxrus»), `09` (pregunta 3) y `10`, y la memoria local (`arranque-fase-0`, `entorno-local`).
@@ -22,9 +22,11 @@ Tareas:
 9. Comprobar que el hook de tipos funciona (`.claude/settings.json`; se salta solo si aún no hay `node_modules/astro`).
 
 **Criterios de aceptación:**
-- [ ] `npm run build`, `npx astro check` y `npm run test` pasan.
-- [ ] Previsualización de `dev` y `josevilatest.vercel.app` funcionando; producción solo desde `prod`.
-- [ ] Pregunta 3 (tipografía) respondida.
+- [x] `npm run build`, `npx astro check` y `npm run test` pasan (11 pruebas: `azar` y esquemas de las 5 colecciones). El hook de tipos detectó los errores reales del starter al limpiarlo.
+- [ ] Previsualización de `dev` y `josevilatest.vercel.app` funcionando; producción solo desde `prod`. Proyecto de Vercel creado con rama de producción `prod`, dominio de test fijado a `test`, salvaguarda en `vercel.json` y protección como Boxrus; falta el primer despliegue.
+- [x] Pregunta 3 (tipografía) respondida: Bodoni Moda.
+
+Desviaciones: el repo `luisfdzs/JoseVila` ya existía (esqueleto Next.js antiguo); se renombró a `josevila-next-archivo` (`09`). `prod` está en GitHub pero aún sin desplegar: el primer despliegue de producción, solo con la aprobación de Luis.
 
 ## Fase 1 · Maqueta en bloques
 Punto de partida: leer `02`, `03`, `04`, `05` («Código que se reutiliza de Boxrus»), `06` y `09` (preguntas 7 y 8).
