@@ -14,7 +14,7 @@ Antes de empezar, lee:
 - `docs/06-rendimiento-y-accesibilidad.md` («Lo que se sabe de Boxrus»: peso y llamadas de dibujo)
 
 Estado del código al empezar: *(lo actualiza el hilo principal al empezar cada fase)*
-- Fase 0 sin empezar: aún no hay código.
+- Fase 0 aprobada (2026-10-11): Astro 7 con React y el stack instalado; `src/layouts/Base.astro` (lang es, noindex, Bodoni Moda `opsz` + Inter), `src/estilos/global.css` (paleta de `docs/02`), `src/components/ui/Logo.astro` provisional (sin viajes), portada provisional en `src/pages/index.astro`, `src/lib/azar.ts` y `src/lib/esquemas.ts` (5 colecciones, contenido vacío) con pruebas en `tests/`. Aún no hay `src/datos/`, isla 3D ni `scripts/capturar.mjs`. La fase 1 crea `src/datos/barberia.ts` y `src/components/barberia/`.
 
 Reglas:
 - Escala real en metros, Y hacia arriba, coordenadas según `docs/03-escena.md`.

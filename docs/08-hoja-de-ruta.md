@@ -5,7 +5,8 @@ Cada fase termina con **capturas y un resumen para Luis**, que da el visto bueno
 ---
 
 ## Estado
-- **Fase 0 terminada el 2026-10-11, pendiente de la aprobación de Luis.** Siguiente: fase 1 (maqueta en bloques).
+- ✅ **Fase 0 aprobada por Luis el 2026-10-11.** Publicada en `dev`, `test` (`josevilatest.vercel.app`) y `prod` (`josevila.vercel.app`).
+- **Siguiente: fase 1 (maqueta en bloques)**, sin empezar. Prompt de arranque en la memoria local `arranque-fase-1`.
 
 ## Fase 0 · Preparación
 Punto de partida en una sesión nueva: leer `01`, `05` (stack, carpetas, código que se reutiliza, despliegue), `06` («Lo que se sabe de Boxrus»), `09` (pregunta 3) y `10`, y la memoria local (`arranque-fase-0`, `entorno-local`).

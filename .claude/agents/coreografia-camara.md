@@ -13,7 +13,7 @@ Antes de empezar, lee:
 - `docs/05-arquitectura.md` (flujo scroll → cámara → interfaz; código que se reutiliza de Boxrus)
 
 Estado del código al empezar: *(lo actualiza el hilo principal al empezar cada fase)*
-- Fase 0 sin empezar: aún no hay código. En la fase 1 se copian de Boxrus `trayectoria.ts`, `pausas.ts`, `progreso.ts`, `scroll.ts`, `paginado.ts`, `modo.ts`, `colisiones.ts` y `ControladorCamara.tsx`, con sus pruebas.
+- Fase 0 aprobada (2026-10-11): Astro 7 con React y el stack instalado; `src/layouts/Base.astro` (lang es, noindex, Bodoni Moda `opsz` + Inter), `src/estilos/global.css` (paleta de `docs/02`), `src/components/ui/Logo.astro` provisional (sin viajes), portada provisional en `src/pages/index.astro`, `src/lib/azar.ts` y `src/lib/esquemas.ts` (5 colecciones, contenido vacío) con pruebas en `tests/`. Aún no hay `src/datos/`, isla 3D ni `scripts/capturar.mjs`. En la fase 1 se copian de Boxrus `trayectoria.ts`, `pausas.ts`, `progreso.ts`, `scroll.ts`, `paginado.ts`, `modo.ts`, `colisiones.ts` y `ControladorCamara.tsx`, con sus pruebas.
 
 Reglas:
 - Los planos salen de `src/datos/paradas.ts`; si ajustas un encuadre, actualiza datos y `docs/04-recorrido-y-paradas.md` en el mismo cambio.

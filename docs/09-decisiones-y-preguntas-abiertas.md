@@ -24,6 +24,7 @@
 | 2026-10-11 | Tipografía de titulares, logotipo y rótulo: **Bodoni Moda** (pregunta 3); textos en Inter | Elección de Luis sobre una muestra de Playfair Display, Bodoni Moda, Cormorant Garamond y Oswald (opción recomendada: lujo preciso, aguanta en el rótulo) |
 | 2026-10-11 | Bodoni Moda con el eje **`opsz`** (`opsz.css`, 46 KB el subconjunto latino) en vez de solo `wght` (26 KB) | Criterio de Claude, revisable: el tamaño óptico ajusta el contraste al tamaño y es lo que la hace legible en el logotipo pequeño |
 | 2026-10-11 | Salvaguarda de producción como **`ignoreCommand` en `vercel.json`** (versionada) en vez de en el panel de Vercel | Criterio de Claude, revisable: queda en el repo desde el primer push y no depende de configurarla a mano |
+| 2026-10-11 | ✅ **Fase 0 aprobada**; publicada en `dev`, `test` y `prod` | Aprobación de Luis |
 | 2026-10-11 | El repo antiguo `luisfdzs/JoseVila` (esqueleto Next.js del 2026-10-03) se renombra a `josevila-next-archivo` y se crea `luisfdzs/josevila` limpio | Decisión de Luis (opción recomendada: reversible, no se pierde nada) |
 
 ## Preguntas abiertas
