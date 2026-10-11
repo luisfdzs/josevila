@@ -1,0 +1,94 @@
+---
+// Menú de píldora del móvil: un icono para volver al inicio y uno por sección
+// que lleva directo a su parada (el viaje lo hace paginado.ts). Solo se muestra
+// con el scroll por paradas activo. Iconos SVG propios, sin recursos externos.
+import { PARADAS, type IdParada } from '../../datos/paradas';
+
+const ICONOS: Partial<Record<IdParada, string>> = {
+  // Inicio (prólogo): casa.
+  P: '<path d="M3.5 11 12 4l8.5 7"/><path d="M6 9.5V20h4.5v-5.5h3V20H18V9.5"/>',
+  // Servicios: tijeras.
+  '1': '<circle cx="6" cy="6.5" r="2.6"/><circle cx="6" cy="17.5" r="2.6"/><path d="M8.3 7.8 20.5 17M8.3 16.2 20.5 7"/>',
+  // Equipo: sillón de barbero (respaldo, asiento, reposabrazos, columna, pie y reposapiés).
+  '2': '<rect x="7" y="3" width="4.5" height="8.5" rx="1"/><path d="M5.5 11.5h10M7 8h7"/><path d="M11 11.5V19M7 20.5h8"/><path d="m15.5 11.5 3.5 4"/>',
+  // Galería: marco con lámina.
+  '3': '<rect x="4.5" y="3" width="15" height="18" rx="1"/><rect x="8" y="6.5" width="8" height="11"/>',
+  // Reservar: calendario.
+  '4': '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M14 14h2"/>',
+  // Ubicación: chincheta de mapa.
+  '5': '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+};
+
+// El prólogo se anuncia como «Inicio».
+const etiqueta = (parada: (typeof PARADAS)[number]) => (parada.id === 'P' ? 'Inicio' : parada.nombre);
+const entradas = PARADAS.map((parada, indice) => ({ parada, indice })).filter(({ parada }) => ICONOS[parada.id]);
+---
+
+<nav class="menu" aria-label="Secciones del recorrido">
+  {
+    entradas.map(({ parada, indice }) => (
+      <button type="button" data-indice={indice} aria-label={etiqueta(parada)} title={etiqueta(parada)}>
+        <svg viewBox="0 0 24 24" aria-hidden="true" set:html={ICONOS[parada.id]} />
+      </button>
+    ))
+  }
+</nav>
+
+<style>
+  .menu {
+    position: fixed;
+    left: 50%;
+    bottom: calc(0.9rem + env(safe-area-inset-bottom));
+    z-index: 3;
+    display: none;
+    gap: 0.15rem;
+    padding: 0.3rem;
+    transform: translateX(-50%);
+    background: rgb(12 13 15 / 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 999px;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+  }
+
+  :global([data-paginado]) .menu {
+    display: flex;
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-blanco-roto);
+    cursor: pointer;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button[aria-current='true'] {
+    background: var(--color-laton);
+    color: var(--color-negro);
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--color-luz);
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

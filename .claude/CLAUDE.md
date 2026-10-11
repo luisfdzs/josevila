@@ -4,6 +4,9 @@ José Vila es una barbería ficticia. Este repo es un **proyecto de práctica**:
 
 @memory/MEMORY.md
 
+## Retomar en una sesión nueva
+Si Luis abre la sesión con un saludo («hola») o sin más indicaciones, **no esperes instrucciones**: lee la memoria de estado de la fase en curso (la marcada «EMPEZAR AQUÍ» en `memory/MEMORY.md`), `docs/08-hoja-de-ruta.md` («Estado») y `docs/10-metodologia.md`; comprueba `git status`, `npm run test` y `npx astro check`; y responde con un resumen breve de dónde estamos y el siguiente paso propuesto, pidiendo su visto bueno antes de lanzarlo.
+
 ## Documentación: léela antes de trabajar
 El plan completo está en `docs/` (índice en `docs/README.md`). **Cómo se trabaja** (sesiones, fases, agentes, verificación, ramas, memoria): `docs/10-metodologia.md`. Según la tarea:
 - Qué toca ahora y qué leer para ello → `docs/08-hoja-de-ruta.md` («Estado» y «Punto de partida» de la fase)

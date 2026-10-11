@@ -26,6 +26,13 @@
 | 2026-10-11 | Salvaguarda de producción como **`ignoreCommand` en `vercel.json`** (versionada) en vez de en el panel de Vercel | Criterio de Claude, revisable: queda en el repo desde el primer push y no depende de configurarla a mano |
 | 2026-10-11 | ✅ **Fase 0 aprobada**; publicada en `dev`, `test` y `prod` | Aprobación de Luis |
 | 2026-10-11 | El repo antiguo `luisfdzs/JoseVila` (esqueleto Next.js del 2026-10-03) se renombra a `josevila-next-archivo` y se crea `luisfdzs/josevila` limpio | Decisión de Luis (opción recomendada: reversible, no se pierde nada) |
+| 2026-10-11 | Pregunta 7: **probar ambos**. Escritorio con scroll libre por defecto y ajuste a paradas con `?ajuste=1`; Luis decide al cerrar la fase 1 | Decisión de Luis (opción recomendada) |
+| 2026-10-11 | ✅ Pregunta 8: **5 puestos por lado** (paso 2,4 m), validado en la maqueta | Decisión de Luis (opción recomendada) |
+| 2026-10-11 | El **dintel** va a haces con el muro de entrada; las letras del rótulo sobresalen hacia dentro hasta z = −0,05 | Criterio de Claude: `03` no fijaba su fondo y con fondo hacia dentro el rótulo habría quedado embutido |
+| 2026-10-11 | En `?captura=1` el móvil **muestra la píldora** (sin gestos ni animación) | Criterio de Claude: capturas de móvil completas y deterministas (Boxrus tuvo que capturar el móvil sin `captura`) |
+| 2026-10-11 | Encuadres móviles con **desplazamiento vertical del objetivo** (`desplazamientoVertical` en `paradas.ts`, `setViewOffset`) en vez de inclinar la mira | Criterio de Claude (agente de coreografía, a propuesta del revisor visual): sube el protagonista sobre la interfaz sin converger las verticales con focales cortas |
+| 2026-10-11 | Espejos: el vidrio mide 0,8 × 1,5 y el marco de latón va **por fuera** (0,84 × 1,54) | Criterio de Claude, revisable |
+| 2026-10-11 | Sillón protagonista con **base de latón** (para distinguirlo de los sillones de los puestos, de cromo) y tarima con **canto de latón** como banda en el borde superior | Criterio de Claude, revisable con Luis |
 
 ## Preguntas abiertas
 
@@ -37,8 +44,8 @@
 | 4 | Hora del día y color del sol (afecta a la dirección del sol y al haz del lucernario) | Luz | Fase 3 | Mediodía cálido, sol alto (~65°) para que el haz caiga sobre el sillón |
 | 5 | ¿Luz precalculada en Blender? | Luz, peso | Fase 3 | Sí, como en Boxrus (escena estática; proceso ya probado) |
 | 6 | Reflejo del suelo: reflejo plano real (`MeshReflectorMaterial`) o solo entorno capturado | Luz, rendimiento | Fase 3 | Real en nivel alto si cabe en el presupuesto; entorno en medio y bajo |
-| 7 | ¿Ajuste a paradas al dejar de hacer scroll o scroll libre? (en escritorio; en móvil, scroll por paradas) | Coreografía | Fase 1 (probar ambos) | Probar con `?ajuste=1` |
-| 8 | Número de puestos: 5 por lado (hipótesis) | Escena | Fase 1 | Validar en la maqueta |
+| 7 | ¿Ajuste a paradas al dejar de hacer scroll o scroll libre? (en escritorio; en móvil, scroll por paradas) | Coreografía | Cierre de la fase 1 (Luis prueba ambos) | Implementados los dos: libre por defecto, ajuste con `?ajuste=1` |
+| ~~8~~ | ~~Número de puestos~~ | — | — | **Cerrada el 2026-10-11:** 5 por lado (ver decisiones) |
 | 9 | Poste de barbero: rojo, blanco y azul clásicos (algo apagados) o versión en negro y latón | Escena | Fase 3 | Clásico, pequeño: es el guiño al oficio |
 
 ## Pendientes menores

@@ -1,9 +1,23 @@
 ---
-// Logotipo provisional (texto JOSÉ VILA en la tipografía de titulares) arriba y
-// centrado: vuelve al inicio. En la fase 1 lo animará el recorrido (de Boxrus).
+// Logotipo (texto JOSÉ VILA en la tipografía de titulares) arriba y centrado:
+// vuelve al inicio. En el recorrido lo anima la página (evento `ir-al-inicio`,
+// cancelado por quien lo atiende); en el resto, va a `/` y empieza en el prólogo.
+// En el prólogo de la landing se oculta (`html[data-prologo]`): ahí ya manda el titular.
 ---
 
 <a class="logo" href="/" aria-label="José Vila, volver al inicio">JOSÉ VILA</a>
+
+<script>
+  const logo = document.querySelector<HTMLAnchorElement>('.logo')!;
+  logo.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!dispatchEvent(new Event('ir-al-inicio', { cancelable: true }))) return;
+    // Que el navegador no restaure la posición: la recarga empieza en el prólogo.
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    location.assign('/');
+  });
+</script>
 
 <style>
   .logo {
@@ -27,10 +41,22 @@
     border-bottom: 2px solid var(--color-laton);
     border-radius: 999px;
     box-shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s;
   }
 
   .logo:focus-visible {
     outline: 2px solid var(--color-luz);
     outline-offset: 3px;
+  }
+
+  :global(html[data-prologo]) .logo {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  :global(html[data-captura]) .logo {
+    transition: none;
   }
 </style>

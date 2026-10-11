@@ -1,32 +1,370 @@
 ---
+// Landing: recorrido 3D por la barbería con una sección HTML por plano y el cierre.
+// Fase 1: textos provisionales de docs/04; los resúmenes del contenido, la
+// cabecera, el indicador «01 / 05» y el pie llegan en la fase 4.
+import Barberia from '../components/barberia/Barberia';
+import MenuParadas from '../components/ui/MenuParadas.astro';
 import Base from '../layouts/Base.astro';
+import { PARADAS, RECORRIDO } from '../datos/paradas';
+
+// El epílogo no lleva panel: su pausa es el cierre, sobre el fundido a blanco.
+const superpuestas = PARADAS.filter((p) => p.id !== 'E');
+const epilogo = PARADAS.find((p) => p.id === 'E')!;
+const secciones = PARADAS.filter((p) => p.interfaz.boton && p.id !== 'E').map((p) => ({ nombre: p.nombre, href: p.interfaz.boton!.href }));
 ---
 
-<Base titulo="José Vila" descripcion="Barbería José Vila: corte, barba y afeitado clásico.">
-  <main>
-    <h1>José Vila</h1>
-    <p>Barbería. Corte, barba y afeitado clásico.</p>
+<Base titulo="José Vila" descripcion="Barbería José Vila: corte, barba y afeitado clásico. Recorre el local: servicios, equipo, galería, reservas y ubicación.">
+  <div class="lienzo">
+    <Barberia client:only="react" />
+  </div>
+  <div class="fundido" aria-hidden="true"></div>
+  <div class="corte" aria-hidden="true"></div>
+  <MenuParadas />
+
+  <main id="contenido" tabindex="-1">
+    <div id="pista" class="pista" style={`--pantallas: ${RECORRIDO.pantallas}`}>
+      {
+        superpuestas.map((parada) => (
+          <section class="parada" id={`parada-${parada.id}`} data-parada={parada.id} aria-labelledby={`titular-${parada.id}`}>
+            <div class="panel">
+              {parada.interfaz.antetitulo && <p class="antetitulo">{parada.interfaz.antetitulo}</p>}
+              {parada.id === 'P' ? (
+                <h1 id={`titular-${parada.id}`}>{parada.interfaz.titular}</h1>
+              ) : (
+                <h2 id={`titular-${parada.id}`}>{parada.interfaz.titular}</h2>
+              )}
+              {parada.interfaz.subtitulo && <p class="subtitulo">{parada.interfaz.subtitulo}</p>}
+              {parada.interfaz.texto && <p>{parada.interfaz.texto}</p>}
+              {(parada.interfaz.boton || parada.interfaz.botonRuta || parada.interfaz.saltar) && (
+                <div class="acciones">
+                  {parada.interfaz.boton && <a class="boton" href={parada.interfaz.boton.href}>{parada.interfaz.boton.texto}</a>}
+                  {/* Provisional: el enlace de ruta saldrá de las coordenadas de src/content/ubicacion/ (fase 4). */}
+                  {parada.interfaz.botonRuta && (
+                    <a class="boton boton--borde" href="/ubicacion">
+                      {parada.interfaz.botonRuta}
+                    </a>
+                  )}
+                  {parada.interfaz.saltar && (
+                    <a class="boton boton--borde" href="#cierre" data-saltar>
+                      {parada.interfaz.saltar}
+                    </a>
+                  )}
+                </div>
+              )}
+              {parada.interfaz.indicacion && <p class="indicacion">{parada.interfaz.indicacion}</p>}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    <section class="cierre" id="cierre" data-parada={epilogo.id} aria-labelledby="titular-cierre">
+      <div class="cierre-centro">
+        <h2 id="titular-cierre" tabindex="-1">{epilogo.interfaz.titular}</h2>
+        {epilogo.interfaz.boton && <a class="boton boton--oscuro" href={epilogo.interfaz.boton.href}>{epilogo.interfaz.boton.texto}</a>}
+        <nav aria-label="Secciones">
+          <ul>
+            {
+              secciones.map((s) => (
+                <li>
+                  <a href={s.href}>{s.nombre}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </section>
   </main>
 </Base>
 
+<script>
+  import { RECORRIDO } from '../datos/paradas';
+  import { calcularPausas } from '../lib/pausas';
+  import { leerModo } from '../lib/modo';
+  import { suscribir } from '../lib/progreso';
+  import { iniciarScroll } from '../lib/scroll';
+  import type { ControladorViajes } from '../lib/paginado';
+
+  const modo = leerModo();
+  const pausas = calcularPausas();
+  const secciones = [...document.querySelectorAll<HTMLElement>('[data-parada]')];
+  const botones = [...document.querySelectorAll<HTMLButtonElement>('.menu button')];
+  let controlador: ControladorViajes | undefined;
+  const fundido = document.querySelector<HTMLElement>('.fundido')!;
+  const corte = document.querySelector<HTMLElement>('.corte')!;
+  // El fundido a blanco empieza a mitad del último tramo y acaba al llegar al cierre.
+  const ubicacion = pausas.at(-2)!;
+  const epilogo = pausas.at(-1)!;
+  const inicioFundido = ubicacion.fin + (epilogo.inicio - ubicacion.fin) * RECORRIDO.inicioFundidoFinal;
+  const indiceCierre = pausas.length - 1;
+
+  if (modo.captura) document.documentElement.dataset.captura = 'si';
+
+  suscribir((p) => {
+    // En un viaje del menú solo se muestra el texto de la parada de destino.
+    const destino = controlador?.destinoViaje() ?? null;
+    secciones.forEach((seccion, k) => {
+      const { inicio, fin } = pausas[k];
+      const margen = (fin - inicio) * 0.35;
+      const activa = p >= inicio - margen && p <= fin + margen && (destino === null || destino === k);
+      seccion.toggleAttribute('data-activa', activa);
+      seccion.setAttribute('aria-hidden', String(!activa));
+    });
+    const f = Math.min(1, Math.max(0, (p - inicioFundido) / (epilogo.inicio - inicioFundido)));
+    fundido.style.opacity = String(f);
+
+    // Icono resaltado: la parada más cercana o, durante un viaje, la de destino.
+    const cercana = pausas.reduce((m, pausa, k) => (Math.abs(pausa.centro - p) < Math.abs(pausas[m].centro - p) ? k : m), 0);
+    const actual = String(destino ?? cercana);
+    botones.forEach((b) => b.setAttribute('aria-current', String(b.dataset.indice === actual)));
+
+    // Logotipo oculto en el prólogo: ahí manda el titular.
+    document.documentElement.toggleAttribute('data-prologo', p < pausas[0].fin);
+  });
+
+  controlador = iniciarScroll(document.getElementById('pista')!, modo, (opacidad) => (corte.style.opacity = String(opacidad)));
+  botones.forEach((boton) => boton.addEventListener('click', () => controlador?.irA(Number(boton.dataset.indice))));
+
+  // «Saltar recorrido»: viaje al cierre y el foco al titular del cierre al llegar.
+  document.querySelector<HTMLAnchorElement>('[data-saltar]')?.addEventListener('click', (e) => {
+    if (!controlador) return;
+    e.preventDefault();
+    controlador.irA(indiceCierre);
+    const espera = setInterval(() => {
+      if (controlador?.destinoViaje() !== null) return;
+      clearInterval(espera);
+      document.getElementById('titular-cierre')?.focus({ preventScroll: true });
+    }, 100);
+  });
+
+  // El logotipo vuelve al prólogo con un viaje, como el menú.
+  addEventListener('ir-al-inicio', (e) => {
+    e.preventDefault();
+    controlador?.irA(0);
+  });
+</script>
+
 <style>
-  main {
-    min-height: 100svh;
-    display: grid;
-    place-content: center;
-    text-align: center;
-    padding: 6rem 1.5rem;
+  .lienzo {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
   }
 
-  h1 {
+  .fundido {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Fundido a negro de los saltos del menú entre secciones no vecinas. */
+  .corte {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: var(--color-piedra);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  main {
+    position: relative;
+    z-index: 2;
+  }
+
+  .pista {
+    height: calc((var(--pantallas) + 1) * 100svh);
+  }
+
+  .parada,
+  .cierre {
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s;
+  }
+
+  .parada {
+    inset: auto auto 0 0;
+    width: min(32rem, 100%);
+    padding: clamp(1rem, 4vw, 3rem);
+  }
+
+  [data-parada][data-activa] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  :global([data-captura]) [data-parada] {
+    transition: none;
+  }
+
+  .panel {
+    padding: 1.25rem 1.5rem;
+    background: rgb(12 13 15 / 0.72);
+    backdrop-filter: blur(6px);
+    border-left: 2px solid var(--color-laton);
+  }
+
+  .panel h1 {
     margin: 0;
-    font-size: clamp(3rem, 10vw, 7rem);
+    font-size: clamp(3rem, 9vw, 5rem);
     font-weight: 500;
   }
 
-  p {
-    margin: 0.75rem 0 0;
+  .panel h2 {
+    text-wrap: balance;
+    margin: 0.25rem 0 0.75rem;
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  }
+
+  .subtitulo {
+    margin: 0.25rem 0 0;
+    font-size: 1.15rem;
     color: var(--color-laton);
     letter-spacing: 0.04em;
+  }
+
+  .antetitulo,
+  .indicacion {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-laton);
+  }
+
+  .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .panel p {
+    margin-block: 0.25rem;
+  }
+
+  .panel .antetitulo,
+  .panel .indicacion {
+    margin-block: 0;
+  }
+
+  .panel .indicacion {
+    margin-top: 0.75rem;
+  }
+
+  .boton {
+    display: inline-block;
+    padding: 0.6rem 1.1rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-negro);
+    text-decoration: none;
+    background: var(--color-laton);
+    border: 1px solid var(--color-laton);
+  }
+
+  .boton--borde {
+    color: var(--color-blanco-roto);
+    background: transparent;
+    border-color: rgb(242 241 238 / 0.4);
+  }
+
+  .boton--oscuro {
+    justify-self: center;
+    color: var(--color-blanco-roto);
+    background: var(--color-negro);
+    border-color: var(--color-negro);
+  }
+
+  .boton:focus-visible {
+    outline: 2px solid var(--color-luz);
+    outline-offset: 2px;
+  }
+
+  /* Sobre el fundido a blanco, que pone el fondo. */
+  .cierre {
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: var(--color-negro);
+  }
+
+  .cierre-centro {
+    display: grid;
+    flex: 1;
+    align-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .cierre h2:focus {
+    outline: none;
+  }
+
+  .cierre h2 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 4rem);
+  }
+
+  .cierre ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cierre a:not(.boton) {
+    color: var(--color-negro);
+    font-weight: 600;
+  }
+
+  /* La píldora del menú ocupa la parte baja: el panel y el cierre suben por encima. */
+  :global([data-paginado]) .parada,
+  :global([data-paginado]) .cierre {
+    padding-bottom: calc(4.9rem + env(safe-area-inset-bottom));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parada,
+    .cierre {
+      transition: none;
+    }
+  }
+
+  /* En vertical la tarjeta deja ver el pasillo: titular más contenido y panel compacto. */
+  @media (max-width: 640px) {
+    .parada {
+      width: 100%;
+      padding: 0.75rem;
+    }
+
+    .panel {
+      padding: 1rem 1.15rem;
+    }
+
+    .panel h1 {
+      font-size: 2.5rem;
+    }
+
+    .panel h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .panel .indicacion {
+      margin-top: 0.5rem;
+    }
   }
 </style>

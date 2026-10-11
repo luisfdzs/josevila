@@ -4,6 +4,8 @@ El recorrido tiene un **prólogo**, **5 paradas** (una por sección de la web) y
 
 Coordenadas en el sistema de `03-escena.md`. Son **hipótesis de partida**: se ajustan en la fase 1 (maqueta en bloques) y la fuente de verdad pasa a ser `src/datos/paradas.ts`.
 
+> **Fase 1 en curso:** los encuadres ya se han ajustado sobre la maqueta (planos 1–5 y todos los móviles, con desplazamiento vertical del objetivo en móvil). Mientras no se cierre la fase, los valores vigentes son los de `src/datos/paradas.ts`; la tabla se actualizará al cerrarla.
+
 ## Resumen
 
 | # | Sección | Elemento | Tipo de plano | Cámara (x, y, z) | Mira a (x, y, z) | Focal aprox. |

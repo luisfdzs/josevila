@@ -38,6 +38,16 @@ Cada cierre de fase anota aquí una tabla «Estado medido (fase N)» con el peso
 | Bodoni Moda `opsz`, subconjunto latino (woff2) | 45 KB | Fuera del presupuesto de JS; el resto de subconjuntos solo se descarga si hace falta (`unicode-range`) |
 | Inter `wght`, subconjunto latino (woff2) | 47 KB | Ídem |
 
+### Medición intermedia (fase 1, maqueta en bloques, 2026-10-11)
+| Pieza | gzip | Nota |
+|---|---|---|
+| three + React Three Fiber (trozo `barberia.*.js`) | 240 KB | Sin drei en la isla inicial (solo en `Depuracion`, diferido) |
+| Cliente de React + planificador | 69 KB | — |
+| Isla (`Barberia.*.js`: escena y cámara) | 10 KB | — |
+| `pausas` y comunes | 1,5 KB | — |
+| **Isla inicial total** | **≈ 321 KB** | Margen ≈ 29 KB hasta 350 (sin postproceso, que irá diferido) |
+| Script de la landing (GSAP + Lenis + recorrido) | 51 KB | Fuera de la isla, como en Boxrus |
+
 ## Niveles de calidad
 | Ajuste | Alto | Medio | Bajo |
 |---|---|---|---|

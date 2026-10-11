@@ -24,7 +24,7 @@ Todas las cifras son **hipótesis de partida** que se validan en la fase de maqu
 | Vidrio | `y` 0,25 a 3,2, en todo el ancho; emisivo suave de cielo (`#f2f4f6`), la calle no se modela |
 | Carpintería | negra, montantes en `x = ±0,9` (puerta) y `±2,55`; perfil de 0,06 m |
 | Puerta | central, dos hojas, 1,8 × 2,6 m |
-| Dintel | macizo negro, `y` 3,2 a 4,0 |
+| Dintel | macizo negro, `y` 3,2 a 4,0, a haces con el muro de entrada (sin fondo hacia dentro) |
 | Rótulo | **JOSÉ VILA** en letras de latón de 0,32 m de alto, centrado en el dintel por dentro (`y = 3,6`, `z = −0,05`), legible desde el interior. Geometría propia o `CanvasTexture`, nunca `Text` de drei (`06`) |
 | Poste de barbero | de pie, en (−1,5, 0, −0,4): pie de latón de 1,0 m, cilindro luminoso Ø 0,18 × 0,8 m (`y` 1,0 a 1,8) con espiral roja, blanca y azul que gira despacio (quieto en `?captura=1`), remates de latón |
 | Mostrador de recepción | caja de 0,6 (x) × 1,05 (alto) × 2,2 (z) centrada en (3,0, 0, −2,6); frente acanalado negro mirando al pasillo, encimera de piedra negra, remate de latón |
@@ -37,7 +37,7 @@ Todas las cifras son **hipótesis de partida** que se validan en la fase de maqu
 | Número | **5 por lado** (10 en total), ejes en `z = −5,6, −8,0, −10,4, −12,8, −15,2` (paso 2,4 m) |
 | Revestimiento de listones | en ambas paredes, de `z = −4,4` a `−16,4`, `y` 0 a 4; listones de 0,06 m con separación de 0,03 m, 0,04 m de grueso |
 | Consola | 1,6 (z) × 0,45 (x) × 0,85 m (alto), contra la pared, centrada en `x = ±3,935`; encimera de piedra negra, tirador de latón |
-| Espejo | rectangular, 0,8 × 1,5 m, `y` 1,05 a 2,55, en `x = ±4,14`; marco de latón de 0,02 m |
+| Espejo | rectangular, vidrio de 0,8 × 1,5 m, `y` 1,05 a 2,55, en `x = ±4,14`; marco de latón de 0,02 m por fuera del vidrio |
 | Líneas de luz del espejo | dos verticales por espejo, 0,035 × 1,5 m, a ±0,55 m del eje del puesto |
 | Sillón de barbero (moderno) | centrado en `x = ±2,85` (a 1,35 m de la pared), mirando al espejo; huella ~0,65 × 0,8 m con reposapiés, alto 1,1 m; cuero negro, base cromada Ø 0,5 m |
 | Pasillo libre | entre respaldos (`x ≈ ±2,45`): ~4,9 m |
